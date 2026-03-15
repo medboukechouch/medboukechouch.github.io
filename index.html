@@ -68,9 +68,24 @@
           <div class="blob blob-1"></div>
           <div class="blob blob-2"></div>
           <article class="profile-card glass">
-            <h2>medboukechouch</h2>
-            <p>Créateur de solutions web propres et modernes.</p>
-            <a href="https://github.com/medboukechouch" target="_blank" rel="noreferrer">Voir le profil GitHub →</a>
+            <div class="profile-head">
+              <div class="portrait-wrap">
+                <img
+                  id="profileImage"
+                  src="https://avatars.githubusercontent.com/medboukechouch?v=4"
+                  alt="Photo de profil de Med Boukechouch"
+                />
+              </div>
+              <div>
+                <h2>medboukechouch</h2>
+                <p>Créateur de solutions web propres et modernes.</p>
+              </div>
+            </div>
+            <div class="hero-cta compact">
+              <a href="https://github.com/medboukechouch" target="_blank" rel="noreferrer">Voir le profil GitHub →</a>
+              <button id="uploadPhotoBtn" class="btn small" type="button">Importer ma photo</button>
+              <input id="photoInput" type="file" accept="image/*" hidden />
+            </div>
           </article>
         </div>
       </section>
@@ -100,10 +115,13 @@
 
       <section id="projects" class="section reveal">
         <div class="section-head">
-          <h2>Projets récents</h2>
-          <button id="refreshRepos" class="btn small">Rafraîchir</button>
+          <h2>Projets GitHub</h2>
+          <div class="section-actions">
+            <button id="toggleRepos" class="btn small">Afficher tout</button>
+            <button id="refreshRepos" class="btn small">Rafraîchir</button>
+          </div>
         </div>
-        <p class="muted">Chargés automatiquement depuis GitHub.</p>
+        <p id="repoSummary" class="muted">Chargés automatiquement depuis GitHub.</p>
         <div id="repoGrid" class="repo-grid" aria-live="polite"></div>
       </section>
 
