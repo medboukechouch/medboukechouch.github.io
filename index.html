@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%235fa8ff'/><stop offset='100%' stop-color='%238b5dff'/></linearGradient></defs><rect width='100' height='100' rx='22' fill='url(%23g)'/><text x='50' y='68' font-family='Arial Black,sans-serif' font-size='52' font-weight='900' text-anchor='middle' fill='white'>MB</text></svg>"/>
 <style>
 /* ─────────────────────────────────────
    TOKENS
@@ -451,7 +452,7 @@ body.light .contact-text{color:rgba(8,18,42,0.6)}
 /* ─────────────────────────────────────
    REVEAL
 ───────────────────────────────────── */
-.reveal{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}.no-js .reveal{opacity:1;transform:none}
 .reveal.in{opacity:1;transform:translateY(0)}
 
 /* ─────────────────────────────────────
@@ -909,4 +910,18 @@ function initTilt(){
 
 /* ── UTILS ── */
 function fmt(n){ return new Intl.NumberFormat("fr-FR").format(n); }
-function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+/* ── EVENTS ── */
+document.getElementById("refreshRepos").addEventListener("click", fetchGH);
+document.getElementById("toggleRepos").addEventListener("click", () => { showAll=!showAll; renderRepos(); });
+
+fetchGH();
+
+/* ── FALLBACK: force reveal if JS observer fails ── */
+setTimeout(() => {
+  document.querySelectorAll(".reveal").forEach(el => el.classList.add("in"));
+}, 800);
+</script>
+</body>
+</html>
