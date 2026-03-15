@@ -549,8 +549,6 @@ body.light .contact-text{color:rgba(8,18,42,0.6)}
       </div>
       <div class="profile-btns">
         <a href="https://github.com/medboukechouch" target="_blank" rel="noreferrer" class="btn sm">Voir le profil GitHub →</a>
-        <button id="uploadPhotoBtn" class="btn sm">📷 Importer photo</button>
-        <input id="photoInput" type="file" accept="image/*" hidden/>
       </div>
     </article>
   </div>
@@ -766,9 +764,9 @@ body.light .contact-text{color:rgba(8,18,42,0.6)}
         <div class="cl-inf"><span class="cl-lbl">PORTFOLIO</span><span class="cl-val">medboukechouch.github.io</span></div>
         <span class="cl-arr">→</span>
       </a>
-      <a href="mailto:med.boukechouch@gmail.com" class="contact-link">
+      <a href="/cdn-cgi/l/email-protection#204d45440e424f554b4543484f55434860474d41494c0e434f4d" class="contact-link">
         <span class="cl-ic">✉</span>
-        <div class="cl-inf"><span class="cl-lbl">EMAIL</span><span class="cl-val">med.boukechouch@gmail.com</span></div>
+        <div class="cl-inf"><span class="cl-lbl">EMAIL</span><span class="cl-val"><span class="__cf_email__" data-cfemail="711c14155f131e041a1412191e04121931161c10181d5f121e1c">[email&#160;protected]</span></span></div>
         <span class="cl-arr">→</span>
       </a>
       <a href="https://linkedin.com/in/medboukechouch" class="contact-link" target="_blank" rel="noreferrer">
@@ -787,7 +785,7 @@ body.light .contact-text{color:rgba(8,18,42,0.6)}
   <p>Backend Engineer &amp; AI Systems · Calais, France</p>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const USERNAME = "medboukechouch";
 let allRepos = [], showAll = false;
 
@@ -909,58 +907,6 @@ function initTilt(){
   });
 }
 
-/* ── PHOTO UPLOAD ── */
-(function(){
-  const saved = localStorage.getItem("profilePhoto");
-  if(saved){ const img = document.getElementById("profileImage"); if(img) img.src = saved; }
-  document.getElementById("uploadPhotoBtn").addEventListener("click", () => document.getElementById("photoInput").click());
-  document.getElementById("photoInput").addEventListener("change", async e => {
-    const file = e.target.files?.[0]; if(!file) return;
-    try{
-      const url = await removeBg(file);
-      document.getElementById("profileImage").src = url;
-      localStorage.setItem("profilePhoto", url);
-    } catch {
-      document.getElementById("profileImage").src = URL.createObjectURL(file);
-    }
-  });
-})();
-
-function removeBg(file){
-  return new Promise((res,rej) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      const img = new Image();
-      img.onload = () => {
-        const cv = document.createElement("canvas");
-        const ctx = cv.getContext("2d",{willReadFrequently:true});
-        cv.width=img.width; cv.height=img.height; ctx.drawImage(img,0,0);
-        const d = ctx.getImageData(0,0,cv.width,cv.height), px=d.data;
-        const pts=[0,cv.width-1,cv.width*(cv.height-1),cv.width*cv.height-1];
-        let r=0,g=0,b=0;
-        pts.forEach(p=>{r+=px[p*4];g+=px[p*4+1];b+=px[p*4+2]});
-        const bg={r:Math.round(r/pts.length),g:Math.round(g/pts.length),b:Math.round(b/pts.length)};
-        for(let i=0;i<px.length;i+=4){
-          const dist=Math.sqrt((px[i]-bg.r)**2+(px[i+1]-bg.g)**2+(px[i+2]-bg.b)**2);
-          if(dist<40) px[i+3]=0;
-        }
-        ctx.putImageData(d,0,0); res(cv.toDataURL("image/png"));
-      };
-      img.onerror=rej; img.src=reader.result;
-    };
-    reader.onerror=rej; reader.readAsDataURL(file);
-  });
-}
-
 /* ── UTILS ── */
 function fmt(n){ return new Intl.NumberFormat("fr-FR").format(n); }
-function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
-
-/* ── EVENTS ── */
-document.getElementById("refreshRepos").addEventListener("click", fetchGH);
-document.getElementById("toggleRepos").addEventListener("click", () => { showAll=!showAll; renderRepos(); });
-
-fetchGH();
-</script>
-</body>
-</html>
+function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
