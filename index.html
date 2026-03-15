@@ -1,351 +1,966 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Mohamed Boukechouch | Backend Engineer & AI Systems</title>
-  <meta name="description" content="Portfolio de Mohamed Boukechouch — Ingénieur Backend & Intégration IA. Master MISC à l'EILCO Calais." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="description" content="Portfolio de Mohamed Boukechouch — Ingénieur Backend & Intégration IA. Master MISC à l'EILCO Calais."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+/* ─────────────────────────────────────
+   TOKENS
+───────────────────────────────────── */
+:root{
+  --bg:#08101f;
+  --bg2:#0d1730;
+  --card:rgba(255,255,255,0.06);
+  --card-h:rgba(255,255,255,0.10);
+  --border:rgba(255,255,255,0.10);
+  --border-h:rgba(99,179,255,0.35);
+  --text:#ecf3ff;
+  --muted:#7a92bb;
+  --p1:#5fa8ff;
+  --p2:#8b5dff;
+  --grad:linear-gradient(135deg,#5fa8ff,#8b5dff);
+  --shadow:0 16px 48px rgba(0,0,0,0.35);
+  --r:14px;
+  --fi:'Inter',sans-serif;
+  --fm:'Fira Code',monospace;
+}
+body.light{
+  --bg:#eef3ff;
+  --bg2:#ffffff;
+  --card:rgba(255,255,255,0.75);
+  --card-h:rgba(255,255,255,0.95);
+  --border:rgba(10,20,60,0.10);
+  --border-h:rgba(10,80,200,0.25);
+  --text:#08122a;
+  --muted:#546080;
+  --p1:#0a5eff;
+  --p2:#6020d0;
+  --shadow:0 16px 48px rgba(10,20,60,0.10);
+}
+
+/* ─────────────────────────────────────
+   RESET & BASE
+───────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--fi);
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+  transition:background .4s,color .4s;
+}
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background:
+    radial-gradient(ellipse 70% 60% at 15% 5%, rgba(95,168,255,0.13) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 85% 90%, rgba(139,93,255,0.12) 0%, transparent 60%);
+  pointer-events:none;z-index:0;
+}
+body.light::before{
+  background:
+    radial-gradient(ellipse 70% 60% at 15% 5%, rgba(95,168,255,0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 85% 90%, rgba(139,93,255,0.08) 0%, transparent 60%);
+}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.cursor-glow{
+  position:fixed;width:300px;height:300px;
+  background:radial-gradient(circle,rgba(95,168,255,0.18),transparent 65%);
+  border-radius:50%;pointer-events:none;
+  transform:translate(-50%,-50%);z-index:0;
+  transition:opacity .3s;
+}
+
+/* ─────────────────────────────────────
+   HEADER
+───────────────────────────────────── */
+.header{
+  position:sticky;top:12px;
+  width:min(1080px,92%);margin:12px auto 0;
+  padding:12px 24px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-radius:var(--r);
+  background:rgba(8,16,31,0.70);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
+  z-index:100;transition:background .4s;
+}
+body.light .header{background:rgba(238,243,255,0.82)}
+
+.logo{
+  font-weight:800;font-size:18px;letter-spacing:-0.5px;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.nav{display:flex;gap:28px}
+.nav a{
+  font-size:13px;font-weight:500;color:var(--muted);
+  transition:color .2s;position:relative;padding-bottom:2px;
+}
+.nav a::after{
+  content:'';position:absolute;bottom:-2px;left:0;right:0;
+  height:1.5px;background:var(--grad);
+  transform:scaleX(0);transition:transform .25s;transform-origin:left;
+  border-radius:2px;
+}
+.nav a:hover{color:var(--text)}
+.nav a:hover::after{transform:scaleX(1)}
+.nav a.active{color:var(--p1)}
+.nav a.active::after{transform:scaleX(1)}
+
+.theme-toggle{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:999px;padding:6px 14px;
+  color:var(--text);font-size:13px;cursor:pointer;
+  transition:all .2s;
+}
+.theme-toggle:hover{border-color:var(--border-h);background:var(--card-h)}
+body.light .moon{display:none}
+body:not(.light) .sun{display:none}
+
+/* ─────────────────────────────────────
+   SECTION WRAPPER
+───────────────────────────────────── */
+.section{
+  width:min(1080px,92%);margin:0 auto;
+  padding:90px 0;position:relative;z-index:1;
+}
+.sec-tag{
+  font-family:var(--fm);font-size:11px;font-weight:500;
+  color:var(--p1);letter-spacing:2px;
+  margin-bottom:10px;display:block;
+}
+h2.sec-h{
+  font-size:clamp(32px,5vw,52px);font-weight:800;
+  line-height:1.05;letter-spacing:-1.5px;margin-bottom:48px;
+}
+h2.sec-h .dim{
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.sec-top{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  flex-wrap:wrap;gap:12px;
+}
+.sec-top h2{margin-bottom:0}
+.sec-actions{display:flex;gap:8px}
+
+/* ─────────────────────────────────────
+   HERO
+───────────────────────────────────── */
+.hero{
+  display:grid;grid-template-columns:1.2fr 1fr;
+  gap:48px;align-items:center;min-height:88vh;
+  padding-top:48px;
+}
+.badge{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:12px;font-weight:600;font-family:var(--fm);
+  color:var(--p1);border:1px solid rgba(95,168,255,0.3);
+  border-radius:999px;padding:6px 14px;
+  background:rgba(95,168,255,0.07);
+  margin-bottom:24px;letter-spacing:0.5px;
+}
+.badge-dot{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--p1);animation:pulse 1.6s infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.8)}}
+
+.hero h1{
+  font-size:clamp(40px,7vw,80px);
+  font-weight:800;line-height:1.0;
+  letter-spacing:-2.5px;margin-bottom:20px;
+}
+.hero h1 .gr{
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+  display:inline-block;
+}
+.hero-sub{
+  font-size:16px;line-height:1.75;
+  color:var(--muted);margin-bottom:32px;max-width:52ch;
+}
+.hero-sub strong{color:var(--text);font-weight:600}
+
+.cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:40px}
+
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--fi);font-size:13px;font-weight:600;
+  padding:11px 22px;border-radius:10px;
+  border:1px solid var(--border);
+  color:var(--muted);background:var(--card);
+  cursor:pointer;transition:all .22s;white-space:nowrap;
+}
+.btn:hover{border-color:var(--border-h);color:var(--text);background:var(--card-h);transform:translateY(-2px)}
+.btn.primary{
+  background:var(--grad);color:#fff;border:none;
+  box-shadow:0 4px 20px rgba(95,168,255,0.3);
+}
+.btn.primary:hover{opacity:0.9;transform:translateY(-2px);box-shadow:0 8px 30px rgba(95,168,255,0.4)}
+.btn.sm{padding:7px 14px;font-size:12px;border-radius:8px}
+
+/* Stats bar */
+.stats-row{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;border-radius:12px;overflow:hidden;
+  border:1px solid var(--border);
+}
+.stat-box{
+  padding:16px;background:var(--card);text-align:center;
+}
+.stat-box strong{
+  display:block;font-size:22px;font-weight:800;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+  margin-bottom:2px;
+}
+.stat-box span{font-family:var(--fm);font-size:10px;color:var(--muted);letter-spacing:1px}
+
+/* Profile card */
+.hero-right{position:relative;height:440px}
+.blob{position:absolute;border-radius:50%;filter:blur(55px);opacity:0.45}
+.blob-1{width:260px;height:260px;background:#3a7bff;top:10px;left:0;animation:fl 9s ease-in-out infinite}
+.blob-2{width:220px;height:220px;background:#7c3bff;bottom:10px;right:0;animation:fl 7s ease-in-out infinite reverse}
+@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
+
+.glass{
+  background:rgba(13,23,48,0.65);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid var(--border);
+}
+body.light .glass{background:rgba(238,243,255,0.80)}
+
+.profile-card{
+  position:absolute;inset:56px 16px 32px;
+  border-radius:20px;padding:24px;
+  display:flex;flex-direction:column;justify-content:center;gap:18px;
+}
+.profile-head{display:flex;align-items:center;gap:14px}
+.avatar{
+  width:76px;height:76px;border-radius:50%;overflow:hidden;
+  border:2px solid rgba(95,168,255,0.4);flex-shrink:0;
+  background:rgba(95,168,255,0.1);
+}
+.avatar img{width:100%;height:100%;object-fit:cover}
+.profile-name{font-size:15px;font-weight:700;margin-bottom:3px}
+.profile-role{font-family:var(--fm);font-size:11px;color:var(--muted);margin-bottom:10px}
+.pills{display:flex;gap:6px;flex-wrap:wrap}
+.pill{
+  font-family:var(--fm);font-size:10px;
+  padding:3px 10px;border-radius:6px;
+  background:rgba(95,168,255,0.10);
+  border:1px solid rgba(95,168,255,0.25);
+  color:var(--p1);
+}
+.profile-btns{display:flex;gap:8px;flex-wrap:wrap}
+
+/* ─────────────────────────────────────
+   ABOUT
+───────────────────────────────────── */
+.about-grid{
+  display:grid;grid-template-columns:1.1fr 0.9fr;
+  gap:56px;align-items:start;
+}
+.about-text{font-size:16px;line-height:1.85;color:rgba(236,243,255,0.65)}
+body.light .about-text{color:rgba(8,18,42,0.65)}
+.about-text p+p{margin-top:16px}
+.about-text strong{color:var(--text)}
+
+.fact-list{display:flex;flex-direction:column}
+.fact{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 0;border-bottom:1px solid var(--border);gap:12px;
+}
+.fact-k{font-family:var(--fm);font-size:10px;color:var(--muted);letter-spacing:1px}
+.fact-v{font-size:13px;font-weight:600;text-align:right}
+.fact-v.live{
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+
+/* ─────────────────────────────────────
+   SKILLS
+───────────────────────────────────── */
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.skill-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--r);padding:24px;
+  transition:all .25s;position:relative;overflow:hidden;
+}
+.skill-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(95,168,255,0.06) 0%,rgba(139,93,255,0.04) 100%);
+  opacity:0;transition:opacity .3s;
+}
+.skill-card:hover{
+  border-color:var(--border-h);
+  transform:translateY(-4px);
+  box-shadow:0 12px 40px rgba(0,0,0,0.25);
+}
+.skill-card:hover::before{opacity:1}
+.skill-ic{font-size:28px;margin-bottom:14px}
+.skill-cat{font-family:var(--fm);font-size:10px;letter-spacing:2px;color:var(--p1);margin-bottom:6px}
+.skill-card h3{font-size:17px;font-weight:700;margin-bottom:14px}
+.tag-row{display:flex;flex-wrap:wrap;gap:6px}
+.tag{
+  font-family:var(--fm);font-size:10px;
+  padding:3px 10px;border-radius:6px;
+  border:1px solid var(--border);color:var(--muted);
+}
+.tag.hi{
+  background:rgba(95,168,255,0.10);
+  border-color:rgba(95,168,255,0.30);
+  color:var(--p1);
+}
+
+/* ─────────────────────────────────────
+   PROJECTS — GitHub
+───────────────────────────────────── */
+#repoSummary{font-family:var(--fm);font-size:11px;color:var(--muted);margin:16px 0 20px;letter-spacing:.5px}
+
+.repo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.repo-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--r);padding:20px;
+  display:flex;flex-direction:column;gap:10px;
+  transition:all .25s;transform-style:preserve-3d;
+}
+.repo-card:hover{
+  border-color:var(--border-h);transform:translateY(-4px);
+  box-shadow:var(--shadow);
+}
+.repo-card h3{font-size:14px;font-weight:700;word-break:break-all;color:var(--text)}
+.repo-card p{font-family:var(--fm);font-size:11px;line-height:1.6;color:var(--muted);flex:1}
+.repo-meta{
+  display:flex;justify-content:space-between;
+  font-family:var(--fm);font-size:10px;color:var(--muted);
+  padding-top:8px;border-top:1px solid var(--border);
+}
+.repo-lang{color:var(--p1);font-weight:500}
+
+/* Featured academic */
+.feat-list{display:flex;flex-direction:column;margin-top:12px}
+.feat-card{
+  display:grid;grid-template-columns:60px 1fr;
+  gap:20px;align-items:center;
+  padding:22px 12px;border-bottom:1px solid var(--border);
+  transition:all .22s;position:relative;cursor:default;
+}
+.feat-card::after{
+  content:'→';position:absolute;right:12px;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+  font-size:18px;opacity:0;transition:all .22s;transform:translateX(-8px);
+}
+.feat-card:hover{background:var(--card);border-radius:10px;padding-left:20px}
+.feat-card:hover::after{opacity:1;transform:translateX(0)}
+.feat-n{font-family:var(--fm);font-size:11px;color:var(--muted);letter-spacing:1px}
+.feat-info h3{font-size:17px;font-weight:700;margin-bottom:6px;transition:color .22s}
+.feat-card:hover .feat-info h3{color:var(--p1)}
+.feat-info p{font-family:var(--fm);font-size:11px;color:var(--muted);margin-bottom:10px;line-height:1.6}
+
+/* ─────────────────────────────────────
+   EDUCATION — TIMELINE
+───────────────────────────────────── */
+.timeline{position:relative;padding-left:24px}
+.timeline::before{
+  content:'';position:absolute;left:0;top:8px;bottom:8px;
+  width:1.5px;
+  background:linear-gradient(to bottom,var(--p1),var(--p2),transparent);
+}
+.tl-item{position:relative;padding:0 0 44px 36px}
+.tl-item::before{
+  content:'';position:absolute;left:-27px;top:8px;
+  width:10px;height:10px;
+  background:var(--grad);border-radius:50%;
+  box-shadow:0 0 12px rgba(95,168,255,0.5);
+}
+.tl-date{
+  font-family:var(--fm);font-size:11px;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+  letter-spacing:1px;margin-bottom:8px;display:inline-block;
+}
+.tl-item h3{font-size:18px;font-weight:700;margin-bottom:4px}
+.tl-item h4{font-size:13px;color:var(--muted);font-weight:400;margin-bottom:10px}
+.tl-item p{font-size:14px;color:rgba(236,243,255,0.58);line-height:1.8}
+body.light .tl-item p{color:rgba(8,18,42,0.58)}
+
+/* ─────────────────────────────────────
+   CONTACT
+───────────────────────────────────── */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.contact-text{font-size:16px;line-height:1.85;color:rgba(236,243,255,0.6);margin-bottom:24px}
+body.light .contact-text{color:rgba(8,18,42,0.6)}
+.contact-text strong{color:var(--text)}
+
+.avail{
+  display:flex;align-items:center;gap:14px;
+  padding:16px 20px;border-radius:12px;
+  border:1px solid rgba(95,168,255,0.25);
+  background:rgba(95,168,255,0.07);
+}
+.avail strong{display:block;font-size:14px;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+  margin-bottom:2px;
+}
+.avail span{font-family:var(--fm);font-size:11px;color:var(--muted)}
+
+.contact-links{display:flex;flex-direction:column;gap:8px;margin-top:0}
+.contact-link{
+  display:flex;align-items:center;gap:14px;
+  padding:16px 18px;border-radius:12px;
+  border:1px solid var(--border);background:var(--card);
+  transition:all .22s;
+}
+.contact-link:hover{
+  border-color:var(--border-h);background:var(--card-h);
+  transform:translateX(6px);
+}
+.cl-ic{
+  width:36px;height:36px;border-radius:8px;
+  background:rgba(95,168,255,0.10);border:1px solid rgba(95,168,255,0.20);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;flex-shrink:0;
+}
+.cl-inf{flex:1}
+.cl-lbl{display:block;font-family:var(--fm);font-size:10px;color:var(--muted);letter-spacing:1px;margin-bottom:2px}
+.cl-val{font-size:14px;font-weight:600;color:var(--text)}
+.cl-arr{
+  font-size:16px;color:var(--muted);transition:all .22s;
+}
+.contact-link:hover .cl-arr{color:var(--p1);transform:translateX(3px)}
+
+/* ─────────────────────────────────────
+   FOOTER
+───────────────────────────────────── */
+.footer{
+  border-top:1px solid var(--border);
+  text-align:center;padding:32px 24px 44px;
+  position:relative;z-index:1;
+}
+.footer p{font-size:13px;color:var(--muted);margin-bottom:4px}
+.footer .gr-text{
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+  font-weight:600;
+}
+
+/* ─────────────────────────────────────
+   REVEAL
+───────────────────────────────────── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+
+/* ─────────────────────────────────────
+   DIVIDERS
+───────────────────────────────────── */
+.section-divider{
+  width:min(1080px,92%);margin:0 auto;
+  height:1px;background:var(--border);
+  position:relative;z-index:1;
+}
+
+/* ─────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────── */
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;min-height:auto;padding-top:32px}
+  .hero-right{height:340px}
+  .about-grid,.contact-grid{grid-template-columns:1fr;gap:36px}
+  .skills-grid{grid-template-columns:repeat(2,1fr)}
+  .repo-grid{grid-template-columns:repeat(2,1fr)}
+  .nav{display:none}
+}
+@media(max-width:560px){
+  .skills-grid,.repo-grid,.stats-row{grid-template-columns:1fr}
+  .feat-card{grid-template-columns:1fr}
+  .feat-n{display:none}
+}
+</style>
 </head>
 <body>
 
-  <!-- Cursor -->
-  <div class="cursor" id="cursor"></div>
-  <div class="cursor-ring" id="cursorRing"></div>
+<div class="cursor-glow" id="glow" aria-hidden="true"></div>
 
-  <!-- Grain overlay -->
-  <div class="grain" aria-hidden="true"></div>
+<!-- NAV -->
+<header class="header" id="top">
+  <a href="#top" class="logo">Med Boukechouch</a>
+  <nav class="nav">
+    <a href="#about">À propos</a>
+    <a href="#skills">Stack</a>
+    <a href="#projects">Projets</a>
+    <a href="#education">Formation</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <button id="themeToggle" class="theme-toggle" aria-label="Thème">
+    <span class="sun">☀️</span><span class="moon">🌙</span>
+  </button>
+</header>
 
-  <!-- NAV -->
-  <header class="header" id="top">
-    <a href="#top" class="logo">MB<span>.</span></a>
-    <nav class="nav">
-      <a href="#about">À propos</a>
-      <a href="#skills">Stack</a>
-      <a href="#projects">Projets</a>
-      <a href="#education">Formation</a>
-      <a href="#contact">Contact</a>
-    </nav>
-    <button id="themeToggle" class="theme-toggle" aria-label="Changer le thème">
-      <span class="sun">☀</span><span class="moon">◑</span>
-    </button>
-  </header>
+<main>
 
-  <main>
+<!-- ── HERO ── -->
+<section class="hero section" id="home">
+  <div class="hero-left reveal">
+    <div class="badge"><span class="badge-dot"></span> Disponible pour des opportunités</div>
+    <h1>
+      Salut, je suis<br>
+      <span class="gr">Mohamed<br>Boukechouch</span>
+    </h1>
+    <p class="hero-sub">
+      <strong>Ingénieur Backend</strong> &amp; Intégration Systèmes IA.<br>
+      Master MISC · EILCO Calais · Bâtir des pipelines intelligents,<br>
+      du code propre et des systèmes qui passent à l'échelle.
+    </p>
+    <div class="cta-row">
+      <a class="btn primary" href="#projects">Voir mes projets →</a>
+      <a class="btn" href="https://github.com/medboukechouch" target="_blank" rel="noreferrer">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        GitHub
+      </a>
+    </div>
+    <div class="stats-row">
+      <div class="stat-box"><strong id="repoCount">--</strong><span>REPOS PUBLICS</span></div>
+      <div class="stat-box"><strong id="followersCount">--</strong><span>FOLLOWERS</span></div>
+      <div class="stat-box"><strong id="starsCount">--</strong><span>STARS TOTALES</span></div>
+    </div>
+  </div>
 
-    <!-- HERO -->
-    <section class="hero section" id="home">
-      <div class="hero-left reveal">
-        <div class="badge">
-          <span class="dot"></span>
-          Disponible pour des opportunités
+  <div class="hero-right">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <article class="profile-card glass reveal">
+      <div class="profile-head">
+        <div class="avatar">
+          <img id="profileImage" src="https://avatars.githubusercontent.com/medboukechouch?v=4" alt="Mohamed Boukechouch"/>
         </div>
-        <h1>
-          Mohamed<br>
-          <span class="stroke">Bouke</span><span class="accent-text">chouch</span>
-        </h1>
-        <p class="hero-sub">
-          Ingénieur Backend &amp; <em>Intégration Systèmes IA</em><br>
-          Étudiant M2 MISC · EILCO Calais, France
-        </p>
-        <div class="hero-cta">
-          <a class="btn primary" href="#projects">Voir mes projets →</a>
-          <a class="btn ghost" href="https://github.com/medboukechouch" target="_blank" rel="noreferrer">GitHub</a>
-        </div>
-        <div class="quick-stats">
-          <div class="stat-item">
-            <strong id="repoCount">--</strong>
-            <span>Repos publics</span>
-          </div>
-          <div class="stat-item">
-            <strong id="followersCount">--</strong>
-            <span>Followers</span>
-          </div>
-          <div class="stat-item">
-            <strong id="starsCount">--</strong>
-            <span>Stars totales</span>
+        <div>
+          <p class="profile-name">medboukechouch</p>
+          <p class="profile-role">Backend · Data Engineering · MLOps</p>
+          <div class="pills">
+            <span class="pill">Python</span>
+            <span class="pill">SQL</span>
+            <span class="pill">Java</span>
           </div>
         </div>
       </div>
-
-      <div class="hero-right">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <article class="profile-card glass reveal">
-          <div class="profile-head">
-            <div class="portrait-wrap">
-              <img id="profileImage"
-                src="https://avatars.githubusercontent.com/medboukechouch?v=4"
-                alt="Mohamed Boukechouch" />
-            </div>
-            <div class="profile-meta">
-              <h2>medboukechouch</h2>
-              <p>Backend · Data Engineering · MLOps</p>
-              <div class="lang-pills">
-                <span>Python</span><span>SQL</span><span>Java</span>
-              </div>
-            </div>
-          </div>
-          <div class="profile-links">
-            <a href="https://github.com/medboukechouch" target="_blank" rel="noreferrer" class="btn ghost small">Voir GitHub →</a>
-            <button id="uploadPhotoBtn" class="btn ghost small">Importer photo</button>
-            <input id="photoInput" type="file" accept="image/*" hidden />
-          </div>
-        </article>
+      <div class="profile-btns">
+        <a href="https://github.com/medboukechouch" target="_blank" rel="noreferrer" class="btn sm">Voir le profil GitHub →</a>
+        <button id="uploadPhotoBtn" class="btn sm">📷 Importer photo</button>
+        <input id="photoInput" type="file" accept="image/*" hidden/>
       </div>
-    </section>
+    </article>
+  </div>
+</section>
 
-    <!-- ABOUT -->
-    <section id="about" class="section reveal">
-      <div class="section-label">// 01 — À PROPOS</div>
-      <h2 class="section-title">Qui suis-<span class="dim">je</span></h2>
-      <div class="about-grid">
-        <div class="about-text">
-          <p>
-            Je suis <strong>étudiant en Master MISC (Informatique)</strong> à l'EILCO de Calais,
-            avec un Bachelor en Ingénierie des Données et Développement Logiciel (IDDL)
-            obtenu à la FSTH d'Al Hoceima.
-          </p>
-          <p>
-            Mon focus : <strong>l'ingénierie backend</strong> avec une intégration profonde
-            des systèmes IA — construire l'infrastructure robuste et scalable qui alimente
-            les applications intelligentes. Des pipelines MLOps à l'automatisation des données,
-            je travaille à l'intersection du logiciel et de l'intelligence.
-          </p>
-          <p>
-            Je préfère <strong>construire plutôt que lire</strong> — apprentissage par projet,
-            structuré et concret. Chaque système livré m'apprend ce que la salle de classe ne peut pas.
-          </p>
-        </div>
-        <div class="about-facts">
-          <div class="fact"><span class="fact-k">LOCALISATION</span><span class="fact-v">Calais, France 🇫🇷</span></div>
-          <div class="fact"><span class="fact-k">FORMATION</span><span class="fact-v">M2 MISC · EILCO</span></div>
-          <div class="fact"><span class="fact-k">FOCUS</span><span class="fact-v">Backend + Intégration IA</span></div>
-          <div class="fact"><span class="fact-k">LANGUES</span><span class="fact-v">Arabe · Français · Anglais</span></div>
-          <div class="fact"><span class="fact-k">ORIGINE</span><span class="fact-v">Al Hoceima, Maroc 🇲🇦</span></div>
-          <div class="fact"><span class="fact-k">STATUT</span><span class="fact-v available">Ouvert aux opportunités</span></div>
-        </div>
+<div class="section-divider"></div>
+
+<!-- ── ABOUT ── -->
+<section id="about" class="section reveal">
+  <span class="sec-tag">// 01 — À PROPOS</span>
+  <h2 class="sec-h">Qui suis-<span class="dim">je ?</span></h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>Je suis <strong>étudiant en Master MISC (Ingénierie des Systèmes Complexes)</strong> à l'EILCO de Calais, après un Bachelor en Ingénierie des Données et Développement Logiciel (IDDL) à la FSTH d'Al Hoceima.</p>
+      <p>Mon focus : <strong>l'ingénierie backend</strong> avec une intégration profonde des systèmes IA — construire l'infrastructure robuste et scalable qui alimente les applications intelligentes. Des pipelines MLOps à l'orchestration de données, je travaille à l'intersection du logiciel et de l'intelligence artificielle.</p>
+      <p>Je préfère <strong>construire plutôt que lire</strong> — apprentissage par projet, structuré, concret, et orienté production. Chaque système livré m'apprend ce que la salle de classe ne peut pas.</p>
+    </div>
+    <div class="fact-list">
+      <div class="fact"><span class="fact-k">LOCALISATION</span><span class="fact-v">Calais, France 🇫🇷</span></div>
+      <div class="fact"><span class="fact-k">FORMATION</span><span class="fact-v">Master MISC · EILCO</span></div>
+      <div class="fact"><span class="fact-k">FOCUS</span><span class="fact-v">Backend + Intégration IA</span></div>
+      <div class="fact"><span class="fact-k">LANGUES</span><span class="fact-v">Arabe · Français · Anglais</span></div>
+      <div class="fact"><span class="fact-k">ORIGINE</span><span class="fact-v">Al Hoceima, Maroc 🇲🇦</span></div>
+      <div class="fact"><span class="fact-k">STATUT</span><span class="fact-v live">Ouvert aux opportunités</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ── SKILLS ── -->
+<section id="skills" class="section reveal">
+  <span class="sec-tag">// 02 — STACK TECHNIQUE</span>
+  <h2 class="sec-h">Mes <span class="dim">compétences</span></h2>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-ic">⚙️</div>
+      <div class="skill-cat">BACKEND</div>
+      <h3>Ingénierie</h3>
+      <div class="tag-row">
+        <span class="tag hi">Python</span><span class="tag hi">Java</span>
+        <span class="tag">REST APIs</span><span class="tag">Docker</span><span class="tag">Git</span>
       </div>
-    </section>
-
-    <!-- SKILLS -->
-    <section id="skills" class="section reveal">
-      <div class="section-label">// 02 — STACK TECHNIQUE</div>
-      <h2 class="section-title">Compé<span class="dim">tences</span></h2>
-      <div class="skills-grid">
-        <div class="skill-card">
-          <div class="skill-icon">⚙️</div>
-          <div class="skill-cat">BACKEND</div>
-          <h3>Ingénierie</h3>
-          <div class="tags">
-            <span class="tag hi">Python</span>
-            <span class="tag hi">Java</span>
-            <span class="tag">REST APIs</span>
-            <span class="tag">Docker</span>
-            <span class="tag">Git</span>
-          </div>
-        </div>
-        <div class="skill-card">
-          <div class="skill-icon">🤖</div>
-          <div class="skill-cat">IA / ML</div>
-          <h3>Intelligence</h3>
-          <div class="tags">
-            <span class="tag hi">TensorFlow</span>
-            <span class="tag hi">Scikit-learn</span>
-            <span class="tag">XGBoost</span>
-            <span class="tag">n8n</span>
-            <span class="tag">MLOps</span>
-          </div>
-        </div>
-        <div class="skill-card">
-          <div class="skill-icon">🗄️</div>
-          <div class="skill-cat">DATA ENGINEERING</div>
-          <h3>Pipelines</h3>
-          <div class="tags">
-            <span class="tag hi">SQL</span>
-            <span class="tag hi">BigQuery</span>
-            <span class="tag">Airflow</span>
-            <span class="tag">dbt</span>
-            <span class="tag">GCP</span>
-          </div>
-        </div>
-        <div class="skill-card">
-          <div class="skill-icon">📊</div>
-          <div class="skill-cat">BI / VISUALISATION</div>
-          <h3>Analytics</h3>
-          <div class="tags">
-            <span class="tag hi">Power BI</span>
-            <span class="tag hi">Streamlit</span>
-            <span class="tag">Pandas</span>
-            <span class="tag">Matplotlib</span>
-          </div>
-        </div>
-        <div class="skill-card">
-          <div class="skill-icon">☁️</div>
-          <div class="skill-cat">CLOUD / INFRA</div>
-          <h3>Infrastructure</h3>
-          <div class="tags">
-            <span class="tag hi">GCP</span>
-            <span class="tag hi">Docker</span>
-            <span class="tag">Linux</span>
-            <span class="tag">Bash</span>
-          </div>
-        </div>
-        <div class="skill-card">
-          <div class="skill-icon">🔗</div>
-          <div class="skill-cat">AUTOMATISATION</div>
-          <h3>Orchestration</h3>
-          <div class="tags">
-            <span class="tag hi">n8n</span>
-            <span class="tag hi">Airflow</span>
-            <span class="tag">Webhooks</span>
-            <span class="tag">CI/CD</span>
-          </div>
-        </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-ic">🤖</div>
+      <div class="skill-cat">IA / ML</div>
+      <h3>Intelligence</h3>
+      <div class="tag-row">
+        <span class="tag hi">TensorFlow</span><span class="tag hi">Scikit-learn</span>
+        <span class="tag">XGBoost</span><span class="tag">n8n</span><span class="tag">MLOps</span>
       </div>
-    </section>
-
-    <!-- PROJECTS (GitHub Live) -->
-    <section id="projects" class="section reveal">
-      <div class="section-label">// 03 — PROJETS GITHUB</div>
-      <div class="section-head">
-        <h2 class="section-title">Mes <span class="dim">travaux</span></h2>
-        <div class="section-actions">
-          <button id="toggleRepos" class="btn ghost small">Afficher tout</button>
-          <button id="refreshRepos" class="btn ghost small">↺ Rafraîchir</button>
-        </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-ic">🗄️</div>
+      <div class="skill-cat">DATA ENGINEERING</div>
+      <h3>Pipelines</h3>
+      <div class="tag-row">
+        <span class="tag hi">SQL</span><span class="tag hi">BigQuery</span>
+        <span class="tag">Airflow</span><span class="tag">dbt</span><span class="tag">GCP</span>
       </div>
-      <p id="repoSummary" class="muted mono">Chargement depuis GitHub…</p>
-      <div id="repoGrid" class="repo-grid" aria-live="polite"></div>
-
-      <!-- Projets académiques clés -->
-      <div class="section-label" style="margin-top:4rem">// PROJETS ACADÉMIQUES SÉLECTIONNÉS</div>
-      <div class="featured-projects">
-        <div class="featured-card">
-          <div class="feat-num">01</div>
-          <div class="feat-info">
-            <h3>Automatisation de Pipelines ML (PFE)</h3>
-            <p>Orchestration automatisée de workflows ML end-to-end avec n8n — projet de fin d'études Bachelor.</p>
-            <div class="tags"><span class="tag hi">n8n</span><span class="tag">Python</span><span class="tag">MLOps</span></div>
-          </div>
-        </div>
-        <div class="featured-card">
-          <div class="feat-num">02</div>
-          <div class="feat-info">
-            <h3>Application de Prédiction de Profit</h3>
-            <p>Modèle ML de prévision financière avec interface Streamlit déployée, collaboratif en stage.</p>
-            <div class="tags"><span class="tag hi">XGBoost</span><span class="tag">Streamlit</span><span class="tag">Pandas</span></div>
-          </div>
-        </div>
-        <div class="featured-card">
-          <div class="feat-num">03</div>
-          <div class="feat-info">
-            <h3>Dashboards BI & Pipelines ETL</h3>
-            <p>Tableaux de bord interactifs Power BI alimentés par des pipelines Airflow/dbt sur Google Cloud.</p>
-            <div class="tags"><span class="tag hi">Power BI</span><span class="tag">Airflow</span><span class="tag">BigQuery</span></div>
-          </div>
-        </div>
-        <div class="featured-card">
-          <div class="feat-num">04</div>
-          <div class="feat-info">
-            <h3>Système de Gestion de Restaurant</h3>
-            <p>Modélisation UML complète — menus, réservations, commandes, paiements. Collaboration IDDL.</p>
-            <div class="tags"><span class="tag hi">UML</span><span class="tag">Java</span><span class="tag">SQL</span></div>
-          </div>
-        </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-ic">📊</div>
+      <div class="skill-cat">BI / VISUALISATION</div>
+      <h3>Analytics</h3>
+      <div class="tag-row">
+        <span class="tag hi">Power BI</span><span class="tag hi">Streamlit</span>
+        <span class="tag">Pandas</span><span class="tag">Matplotlib</span>
       </div>
-    </section>
+    </div>
+    <div class="skill-card">
+      <div class="skill-ic">☁️</div>
+      <div class="skill-cat">CLOUD / INFRA</div>
+      <h3>Infrastructure</h3>
+      <div class="tag-row">
+        <span class="tag hi">GCP</span><span class="tag hi">Docker</span>
+        <span class="tag">Linux</span><span class="tag">Bash</span><span class="tag">CI/CD</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-ic">🔗</div>
+      <div class="skill-cat">AUTOMATISATION</div>
+      <h3>Orchestration</h3>
+      <div class="tag-row">
+        <span class="tag hi">n8n</span><span class="tag hi">Airflow</span>
+        <span class="tag">Webhooks</span><span class="tag">NumPy</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- EDUCATION -->
-    <section id="education" class="section reveal">
-      <div class="section-label">// 04 — FORMATION</div>
-      <h2 class="section-title">Parcours <span class="dim">académique</span></h2>
-      <div class="timeline">
-        <div class="tl-item">
-          <div class="tl-date">2024 — EN COURS</div>
-          <div class="tl-body">
-            <h3>Master en Informatique — MISC</h3>
-            <h4>EILCO · Calais, France 🇫🇷</h4>
-            <p>Ingénierie logicielle avancée, systèmes IA, architectures distribuées. Spécialisation backend engineering et intégration IA à l'échelle de production.</p>
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-date">2022 — 2024</div>
-          <div class="tl-body">
-            <h3>Licence — Ingénierie des Données &amp; Dev Logiciel (IDDL)</h3>
-            <h4>FSTH · Al Hoceima, Maroc 🇲🇦</h4>
-            <p>Fondations en data engineering, développement logiciel et systèmes ML. <strong>PFE :</strong> Automatisation de pipelines ML avec n8n.</p>
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-date">2020 — 2022</div>
-          <div class="tl-body">
-            <h3>DEUST — Mathématiques, Informatique, Physique (MIP)</h3>
-            <h4>Maroc · Score : 12.61/20</h4>
-            <p>Fondements scientifiques et mathématiques de l'informatique.</p>
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-date">2022</div>
-          <div class="tl-body">
-            <h3>Baccalauréat — Sciences Physiques</h3>
-            <h4>Option française · <strong>Mention Bien</strong></h4>
-            <p>Filière scientifique avec distinction, option française.</p>
-          </div>
+<div class="section-divider"></div>
+
+<!-- ── PROJECTS ── -->
+<section id="projects" class="section reveal">
+  <span class="sec-tag">// 03 — PROJETS GITHUB</span>
+  <div class="sec-top">
+    <h2 class="sec-h">Mes <span class="dim">travaux</span></h2>
+    <div class="sec-actions">
+      <button id="toggleRepos" class="btn sm">Afficher tout</button>
+      <button id="refreshRepos" class="btn sm">↺ Rafraîchir</button>
+    </div>
+  </div>
+  <p id="repoSummary">Chargement depuis GitHub…</p>
+  <div id="repoGrid" class="repo-grid" aria-live="polite"></div>
+
+  <span class="sec-tag" style="margin-top:72px;display:block">// PROJETS ACADÉMIQUES SÉLECTIONNÉS</span>
+  <div class="feat-list">
+    <div class="feat-card">
+      <span class="feat-n">01</span>
+      <div class="feat-info">
+        <h3>🏷️ PricePulse — AI Price Prediction Engine</h3>
+        <p>Moteur de tarification intelligent pour vendeurs Amazon : GradientBoosting ML + Google Gemini LLM + 3 personas vendeur. Entraîné sur 50 444 produits, 24 catégories, 363 prix de référence, 243 tests automatisés.</p>
+        <div class="tag-row"><span class="tag hi">Python</span><span class="tag hi">Gemini API</span><span class="tag hi">Scikit-learn</span><span class="tag">GradientBoosting</span><span class="tag">TF-IDF</span><span class="tag">AI Agents</span></div>
+        <a href="https://github.com/medboukechouch/PricePulseProject" target="_blank" rel="noreferrer" class="btn sm" style="margin-top:12px;display:inline-flex">Voir le repo →</a>
+      </div>
+    </div>
+    <div class="feat-card">
+      <span class="feat-n">02</span>
+      <div class="feat-info">
+        <h3>Automatisation de Pipelines ML — PFE</h3>
+        <p>Orchestration end-to-end de workflows ML avec n8n. Projet de fin d'études Bachelor, FSTH Al Hoceima.</p>
+        <div class="tag-row"><span class="tag hi">n8n</span><span class="tag">Python</span><span class="tag">MLOps</span><span class="tag">Scikit-learn</span></div>
+      </div>
+    </div>
+    <div class="feat-card">
+      <span class="feat-n">03</span>
+      <div class="feat-info">
+        <h3>Application de Prédiction de Profit</h3>
+        <p>Modèle ML de prévision financière avec interface Streamlit déployée en production.</p>
+        <div class="tag-row"><span class="tag hi">XGBoost</span><span class="tag">Streamlit</span><span class="tag">Pandas</span></div>
+      </div>
+    </div>
+    <div class="feat-card">
+      <span class="feat-n">04</span>
+      <div class="feat-info">
+        <h3>Dashboards BI &amp; Pipelines ETL</h3>
+        <p>Tableaux de bord interactifs Power BI alimentés par des pipelines Airflow/dbt sur Google Cloud.</p>
+        <div class="tag-row"><span class="tag hi">Power BI</span><span class="tag">Airflow</span><span class="tag">dbt</span><span class="tag">BigQuery</span></div>
+      </div>
+    </div>
+    <div class="feat-card">
+      <span class="feat-n">05</span>
+      <div class="feat-info">
+        <h3>Analyse CO₂ &amp; Visualisation de Données</h3>
+        <p>Analyse exploratoire des émissions de CO₂ mondiales avec visualisations avancées.</p>
+        <div class="tag-row"><span class="tag hi">Python</span><span class="tag">Pandas</span><span class="tag">Seaborn</span><span class="tag">Jupyter</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ── EDUCATION ── -->
+<section id="education" class="section reveal">
+  <span class="sec-tag">// 04 — FORMATION</span>
+  <h2 class="sec-h">Parcours <span class="dim">académique</span></h2>
+  <div class="timeline">
+    <div class="tl-item">
+      <span class="tl-date">2024 — EN COURS</span>
+      <h3>Master — Ingénierie des Systèmes Complexes (MISC)</h3>
+      <h4>EILCO · Calais, France 🇫🇷</h4>
+      <p>Ingénierie logicielle avancée, systèmes IA, architectures distribuées. Focus backend engineering et intégration IA à l'échelle production.</p>
+    </div>
+    <div class="tl-item">
+      <span class="tl-date">2022 — 2024</span>
+      <h3>Licence IDDL — Ingénierie des Données &amp; Dev Logiciel</h3>
+      <h4>FSTH · Al Hoceima, Maroc 🇲🇦 · Mention : 16.83/20 (semestre final)</h4>
+      <p>Fondations en data engineering, développement logiciel et systèmes ML. <strong>PFE :</strong> Automatisation de pipelines ML avec n8n — mention très bien.</p>
+    </div>
+    <div class="tl-item">
+      <span class="tl-date">2020 — 2022</span>
+      <h3>DEUST — Mathématiques, Informatique, Physique (MIP)</h3>
+      <h4>Maroc · 12.61/20</h4>
+      <p>Fondements scientifiques et mathématiques de l'informatique.</p>
+    </div>
+    <div class="tl-item">
+      <span class="tl-date">2022</span>
+      <h3>Baccalauréat — Sciences Physiques</h3>
+      <h4>Option française · <strong>Mention Bien — 14.76/20</strong></h4>
+      <p>Filière scientifique avec distinction, option française.</p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ── CONTACT ── -->
+<section id="contact" class="section reveal">
+  <span class="sec-tag">// 05 — CONTACT</span>
+  <h2 class="sec-h">Travailler <span class="dim">ensemble</span></h2>
+  <div class="contact-grid">
+    <div>
+      <p class="contact-text">Je recherche activement des opportunités en <strong>ingénierie backend</strong> avec intégration IA, des stages et des collaborations de recherche. Si vous construisez quelque chose d'ambitieux — parlons-en.</p>
+      <div class="avail">
+        <span class="badge-dot" style="width:9px;height:9px;flex-shrink:0"></span>
+        <div>
+          <strong>Actuellement disponible</strong>
+          <span>Calais · Ouvert au télétravail &amp; relocation</span>
         </div>
       </div>
-    </section>
+    </div>
+    <div class="contact-links">
+      <a href="https://github.com/medboukechouch" class="contact-link" target="_blank" rel="noreferrer">
+        <span class="cl-ic">⌥</span>
+        <div class="cl-inf"><span class="cl-lbl">GITHUB</span><span class="cl-val">medboukechouch</span></div>
+        <span class="cl-arr">→</span>
+      </a>
+      <a href="https://medboukechouch.github.io" class="contact-link" target="_blank" rel="noreferrer">
+        <span class="cl-ic">◈</span>
+        <div class="cl-inf"><span class="cl-lbl">PORTFOLIO</span><span class="cl-val">medboukechouch.github.io</span></div>
+        <span class="cl-arr">→</span>
+      </a>
+      <a href="mailto:med.boukechouch@gmail.com" class="contact-link">
+        <span class="cl-ic">✉</span>
+        <div class="cl-inf"><span class="cl-lbl">EMAIL</span><span class="cl-val">med.boukechouch@gmail.com</span></div>
+        <span class="cl-arr">→</span>
+      </a>
+      <a href="https://linkedin.com/in/medboukechouch" class="contact-link" target="_blank" rel="noreferrer">
+        <span class="cl-ic">↗</span>
+        <div class="cl-inf"><span class="cl-lbl">LINKEDIN</span><span class="cl-val">Mohamed Boukechouch</span></div>
+        <span class="cl-arr">→</span>
+      </a>
+    </div>
+  </div>
+</section>
 
-    <!-- CONTACT -->
-    <section id="contact" class="section reveal">
-      <div class="section-label">// 05 — CONTACT</div>
-      <h2 class="section-title">Travailler <span class="dim">ensemble</span></h2>
-      <div class="contact-grid">
-        <div class="contact-left">
-          <p>Je recherche activement des opportunités en <strong>ingénierie backend</strong> avec intégration IA, des stages et des collaborations de recherche. Si vous construisez quelque chose d'ambitieux, parlons-en.</p>
-          <div class="avail-badge">
-            <span class="dot"></span>
-            <div>
-              <strong>Actuellement disponible</strong>
-              <span>Calais · Ouvert au télétravail &amp; relocation</span>
-            </div>
-          </div>
-        </div>
-        <div class="contact-links">
-          <a href="https://github.com/medboukechouch" class="contact-link" target="_blank" rel="noreferrer">
-            <span class="cl-icon">⌥</span>
-            <div><span class="cl-label">GITHUB</span><span class="cl-val">medboukechouch</span></div>
-            <span class="cl-arr">→</span>
-          </a>
-          <a href="https://medboukechouch.github.io" class="contact-link" target="_blank" rel="noreferrer">
-            <span class="cl-icon">◈</span>
-            <div><span class="cl-label">PORTFOLIO</span><span class="cl-val">medboukechouch.github.io</span></div>
-            <span class="cl-arr">→</span>
-          </a>
-          <a href="mailto:votre.email@example.com" class="contact-link">
-            <span class="cl-icon">✉</span>
-            <div><span class="cl-label">EMAIL</span><span class="cl-val">votre.email@example.com</span></div>
-            <span class="cl-arr">→</span>
-          </a>
-          <a href="https://linkedin.com/in/medboukechouch" class="contact-link" target="_blank" rel="noreferrer">
-            <span class="cl-icon">↗</span>
-            <div><span class="cl-label">LINKEDIN</span><span class="cl-val">Mohamed Boukechouch</span></div>
-            <span class="cl-arr">→</span>
-          </a>
-        </div>
+</main>
+
+<footer class="footer">
+  <p>© <span id="year"></span> <span class="gr-text">Mohamed Boukechouch</span> · Fait avec passion.</p>
+  <p>Backend Engineer &amp; AI Systems · Calais, France</p>
+</footer>
+
+<script>
+const USERNAME = "medboukechouch";
+let allRepos = [], showAll = false;
+
+document.getElementById("year").textContent = new Date().getFullYear();
+
+/* ── CURSOR GLOW ── */
+window.addEventListener("pointermove", e => {
+  const g = document.getElementById("glow");
+  if(g){ g.style.left = e.clientX+"px"; g.style.top = e.clientY+"px"; }
+}, {passive:true});
+
+/* ── THEME ── */
+(function(){
+  if(localStorage.getItem("theme")==="light") document.body.classList.add("light");
+  document.getElementById("themeToggle").addEventListener("click", () => {
+    document.body.classList.toggle("light");
+    localStorage.setItem("theme", document.body.classList.contains("light")?"light":"dark");
+  });
+})();
+
+/* ── REVEAL ── */
+(function(){
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((e,i) => {
+      if(e.isIntersecting){ setTimeout(()=>e.target.classList.add("in"), i*60); obs.unobserve(e.target); }
+    });
+  },{threshold:0.10});
+  document.querySelectorAll(".reveal").forEach(el => obs.observe(el));
+})();
+
+/* ── ACTIVE NAV ── */
+(function(){
+  const secs = document.querySelectorAll("section[id]");
+  const links = document.querySelectorAll(".nav a");
+  window.addEventListener("scroll", () => {
+    let cur = "";
+    secs.forEach(s => { if(window.scrollY >= s.offsetTop - 150) cur = s.id; });
+    links.forEach(a => {
+      const match = a.getAttribute("href") === "#"+cur;
+      a.classList.toggle("active", match);
+    });
+  }, {passive:true});
+})();
+
+/* ── GITHUB ── */
+async function fetchGH(){
+  const grid = document.getElementById("repoGrid");
+  const summ = document.getElementById("repoSummary");
+  grid.innerHTML = "<p style='font-family:\"Fira Code\",monospace;font-size:12px;color:var(--muted);padding:20px 0'>Connexion à l'API GitHub…</p>";
+  try {
+    const [uRes, repos] = await Promise.all([
+      fetch("https://api.github.com/users/"+USERNAME),
+      fetchAllRepos()
+    ]);
+    if(!uRes.ok) throw new Error();
+    const u = await uRes.json();
+    if(u.public_repos != null) document.getElementById("repoCount").textContent = fmt(u.public_repos);
+    if(u.followers    != null) document.getElementById("followersCount").textContent = fmt(u.followers);
+    if(u.avatar_url)           document.getElementById("profileImage").src = u.avatar_url;
+
+    allRepos = repos.filter(r=>!r.fork).sort((a,b)=>new Date(b.updated_at)-new Date(a.updated_at));
+    const stars = allRepos.reduce((s,r)=>s+(r.stargazers_count||0),0);
+    document.getElementById("starsCount").textContent = fmt(stars);
+
+    if(!allRepos.length){
+      grid.innerHTML = "<p style='color:var(--muted);font-size:13px'>Aucun dépôt public trouvé.</p>";
+      return;
+    }
+    renderRepos();
+  } catch(err){
+    grid.innerHTML = "<p style='font-family:\"Fira Code\",monospace;font-size:12px;color:var(--muted);padding:20px 0'>API GitHub inaccessible pour le moment.</p>";
+    document.getElementById("repoSummary").textContent = "Erreur de connexion.";
+  }
+}
+
+async function fetchAllRepos(){
+  let page=1, all=[];
+  while(true){
+    const r = await fetch("https://api.github.com/users/"+USERNAME+"/repos?sort=updated&per_page=100&page="+page);
+    if(!r.ok) throw new Error();
+    const b = await r.json(); all.push(...b);
+    if(b.length<100) break; page++;
+  }
+  return all;
+}
+
+function renderRepos(){
+  const grid    = document.getElementById("repoGrid");
+  const summ    = document.getElementById("repoSummary");
+  const toggleB = document.getElementById("toggleRepos");
+  const vis = showAll ? allRepos : allRepos.slice(0,9);
+
+  grid.innerHTML = vis.map(r => `
+    <article class="repo-card" data-tilt>
+      <h3>${esc(r.name)}</h3>
+      <p>${esc(r.description || "Projet sans description.")}</p>
+      <div class="repo-meta">
+        <span class="repo-lang">${esc(r.language||"—")}</span>
+        <span>⭐ ${r.stargazers_count||0}</span>
       </div>
-    </section>
+      <a class="btn sm" href="${r.html_url}" target="_blank" rel="noreferrer">Voir le repo →</a>
+    </article>`).join("");
 
-  </main>
+  summ.textContent = `${vis.length} / ${allRepos.length} projets affichés (forks exclus)`;
+  toggleB.textContent = showAll ? "Afficher moins" : "Afficher tout";
+  initTilt();
+}
 
-  <footer class="footer">
-    <p>© <span id="year"></span> <span class="accent-text">Mohamed Boukechouch</span> · Fait avec du code propre.</p>
-    <p class="mono muted">Backend Engineer & AI Systems · Calais, France</p>
-  </footer>
+/* ── TILT ── */
+function initTilt(){
+  document.querySelectorAll("[data-tilt]").forEach(c => {
+    c.addEventListener("mousemove", e => {
+      const r = c.getBoundingClientRect();
+      const rx = ((e.clientY-r.top)/r.height - 0.5)*-7;
+      const ry = ((e.clientX-r.left)/r.width - 0.5)*7;
+      c.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
+    });
+    c.addEventListener("mouseleave", () => { c.style.transform = ""; });
+  });
+}
 
-  <script src="script.js"></script>
+/* ── PHOTO UPLOAD ── */
+(function(){
+  const saved = localStorage.getItem("profilePhoto");
+  if(saved){ const img = document.getElementById("profileImage"); if(img) img.src = saved; }
+  document.getElementById("uploadPhotoBtn").addEventListener("click", () => document.getElementById("photoInput").click());
+  document.getElementById("photoInput").addEventListener("change", async e => {
+    const file = e.target.files?.[0]; if(!file) return;
+    try{
+      const url = await removeBg(file);
+      document.getElementById("profileImage").src = url;
+      localStorage.setItem("profilePhoto", url);
+    } catch {
+      document.getElementById("profileImage").src = URL.createObjectURL(file);
+    }
+  });
+})();
+
+function removeBg(file){
+  return new Promise((res,rej) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const img = new Image();
+      img.onload = () => {
+        const cv = document.createElement("canvas");
+        const ctx = cv.getContext("2d",{willReadFrequently:true});
+        cv.width=img.width; cv.height=img.height; ctx.drawImage(img,0,0);
+        const d = ctx.getImageData(0,0,cv.width,cv.height), px=d.data;
+        const pts=[0,cv.width-1,cv.width*(cv.height-1),cv.width*cv.height-1];
+        let r=0,g=0,b=0;
+        pts.forEach(p=>{r+=px[p*4];g+=px[p*4+1];b+=px[p*4+2]});
+        const bg={r:Math.round(r/pts.length),g:Math.round(g/pts.length),b:Math.round(b/pts.length)};
+        for(let i=0;i<px.length;i+=4){
+          const dist=Math.sqrt((px[i]-bg.r)**2+(px[i+1]-bg.g)**2+(px[i+2]-bg.b)**2);
+          if(dist<40) px[i+3]=0;
+        }
+        ctx.putImageData(d,0,0); res(cv.toDataURL("image/png"));
+      };
+      img.onerror=rej; img.src=reader.result;
+    };
+    reader.onerror=rej; reader.readAsDataURL(file);
+  });
+}
+
+/* ── UTILS ── */
+function fmt(n){ return new Intl.NumberFormat("fr-FR").format(n); }
+function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+/* ── EVENTS ── */
+document.getElementById("refreshRepos").addEventListener("click", fetchGH);
+document.getElementById("toggleRepos").addEventListener("click", () => { showAll=!showAll; renderRepos(); });
+
+fetchGH();
+</script>
 </body>
 </html>
