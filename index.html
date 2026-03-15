@@ -1,144 +1,351 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Med Boukechouch | Portfolio</title>
-    <meta
-      name="description"
-      content="Portfolio moderne et interactif de Med Boukechouch - projets, compétences et contact."
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <div class="cursor-glow" aria-hidden="true"></div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mohamed Boukechouch | Backend Engineer & AI Systems</title>
+  <meta name="description" content="Portfolio de Mohamed Boukechouch — Ingénieur Backend & Intégration IA. Master MISC à l'EILCO Calais." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
 
-    <header class="header glass" id="top">
-      <a href="#top" class="logo">Med<span>.</span></a>
-      <nav class="nav">
-        <a href="#about">À propos</a>
-        <a href="#skills">Compétences</a>
-        <a href="#projects">Projets</a>
-        <a href="#contact">Contact</a>
-      </nav>
-      <button id="themeToggle" class="theme-toggle" aria-label="Changer le thème">
-        <span class="sun">☀️</span>
-        <span class="moon">🌙</span>
-      </button>
-    </header>
+  <!-- Cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
 
-    <main>
-      <section class="hero section reveal">
-        <div class="hero-content">
-          <p class="badge">Disponible pour collaborer</p>
-          <h1>
-            Salut, je suis <span>Med Boukechouch</span><br />
-            Développeur Web moderne
-          </h1>
-          <p>
-            Je construis des expériences web rapides, élégantes et interactives.
-            Voici un portfolio moderne prêt pour <strong>GitHub Pages</strong>.
-          </p>
-          <div class="hero-cta">
-            <a class="btn primary" href="#projects">Voir mes projets</a>
-            <a class="btn" href="https://github.com/medboukechouch" target="_blank" rel="noreferrer">Mon GitHub</a>
-          </div>
-          <div class="quick-stats">
-            <div>
-              <strong id="repoCount">--</strong>
-              <span>Repos publics</span>
-            </div>
-            <div>
-              <strong id="followersCount">--</strong>
-              <span>Followers</span>
-            </div>
-            <div>
-              <strong id="starsCount">--</strong>
-              <span>Stars totales</span>
-            </div>
-          </div>
+  <!-- Grain overlay -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- NAV -->
+  <header class="header" id="top">
+    <a href="#top" class="logo">MB<span>.</span></a>
+    <nav class="nav">
+      <a href="#about">À propos</a>
+      <a href="#skills">Stack</a>
+      <a href="#projects">Projets</a>
+      <a href="#education">Formation</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button id="themeToggle" class="theme-toggle" aria-label="Changer le thème">
+      <span class="sun">☀</span><span class="moon">◑</span>
+    </button>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero section" id="home">
+      <div class="hero-left reveal">
+        <div class="badge">
+          <span class="dot"></span>
+          Disponible pour des opportunités
         </div>
-        <div class="hero-visual">
-          <div class="blob blob-1"></div>
-          <div class="blob blob-2"></div>
-          <article class="profile-card glass">
-            <div class="profile-head">
-              <div class="portrait-wrap">
-                <img
-                  id="profileImage"
-                  src="https://avatars.githubusercontent.com/medboukechouch?v=4"
-                  alt="Photo de profil de Med Boukechouch"
-                />
-              </div>
-              <div>
-                <h2>medboukechouch</h2>
-                <p>Créateur de solutions web propres et modernes.</p>
-              </div>
-            </div>
-            <div class="hero-cta compact">
-              <a href="https://github.com/medboukechouch" target="_blank" rel="noreferrer">Voir le profil GitHub →</a>
-              <button id="uploadPhotoBtn" class="btn small" type="button">Importer ma photo</button>
-              <input id="photoInput" type="file" accept="image/*" hidden />
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section id="about" class="section reveal">
-        <h2>À propos</h2>
-        <p>
-          Passionné par le développement web, j’aime transformer des idées en interfaces
-          performantes et visuellement marquantes. Mon objectif est de livrer des produits
-          intuitifs, maintenables et prêts pour la production.
+        <h1>
+          Mohamed<br>
+          <span class="stroke">Bouke</span><span class="accent-text">chouch</span>
+        </h1>
+        <p class="hero-sub">
+          Ingénieur Backend &amp; <em>Intégration Systèmes IA</em><br>
+          Étudiant M2 MISC · EILCO Calais, France
         </p>
-      </section>
-
-      <section id="skills" class="section reveal">
-        <h2>Compétences</h2>
-        <div class="chips">
-          <span>HTML5</span>
-          <span>CSS3</span>
-          <span>JavaScript</span>
-          <span>React</span>
-          <span>Node.js</span>
-          <span>Git & GitHub</span>
-          <span>Responsive Design</span>
-          <span>UI/UX</span>
+        <div class="hero-cta">
+          <a class="btn primary" href="#projects">Voir mes projets →</a>
+          <a class="btn ghost" href="https://github.com/medboukechouch" target="_blank" rel="noreferrer">GitHub</a>
         </div>
-      </section>
-
-      <section id="projects" class="section reveal">
-        <div class="section-head">
-          <h2>Projets GitHub</h2>
-          <div class="section-actions">
-            <button id="toggleRepos" class="btn small">Afficher tout</button>
-            <button id="refreshRepos" class="btn small">Rafraîchir</button>
+        <div class="quick-stats">
+          <div class="stat-item">
+            <strong id="repoCount">--</strong>
+            <span>Repos publics</span>
+          </div>
+          <div class="stat-item">
+            <strong id="followersCount">--</strong>
+            <span>Followers</span>
+          </div>
+          <div class="stat-item">
+            <strong id="starsCount">--</strong>
+            <span>Stars totales</span>
           </div>
         </div>
-        <p id="repoSummary" class="muted">Chargés automatiquement depuis GitHub.</p>
-        <div id="repoGrid" class="repo-grid" aria-live="polite"></div>
-      </section>
+      </div>
 
-      <section id="contact" class="section reveal">
-        <h2>Contact</h2>
-        <p>Vous avez une idée de projet ? Discutons-en.</p>
-        <div class="hero-cta">
-          <a class="btn primary" href="mailto:youremail@example.com">Envoyer un email</a>
-          <a class="btn" href="https://github.com/medboukechouch" target="_blank" rel="noreferrer">Message via GitHub</a>
+      <div class="hero-right">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <article class="profile-card glass reveal">
+          <div class="profile-head">
+            <div class="portrait-wrap">
+              <img id="profileImage"
+                src="https://avatars.githubusercontent.com/medboukechouch?v=4"
+                alt="Mohamed Boukechouch" />
+            </div>
+            <div class="profile-meta">
+              <h2>medboukechouch</h2>
+              <p>Backend · Data Engineering · MLOps</p>
+              <div class="lang-pills">
+                <span>Python</span><span>SQL</span><span>Java</span>
+              </div>
+            </div>
+          </div>
+          <div class="profile-links">
+            <a href="https://github.com/medboukechouch" target="_blank" rel="noreferrer" class="btn ghost small">Voir GitHub →</a>
+            <button id="uploadPhotoBtn" class="btn ghost small">Importer photo</button>
+            <input id="photoInput" type="file" accept="image/*" hidden />
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section reveal">
+      <div class="section-label">// 01 — À PROPOS</div>
+      <h2 class="section-title">Qui suis-<span class="dim">je</span></h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            Je suis <strong>étudiant en Master MISC (Informatique)</strong> à l'EILCO de Calais,
+            avec un Bachelor en Ingénierie des Données et Développement Logiciel (IDDL)
+            obtenu à la FSTH d'Al Hoceima.
+          </p>
+          <p>
+            Mon focus : <strong>l'ingénierie backend</strong> avec une intégration profonde
+            des systèmes IA — construire l'infrastructure robuste et scalable qui alimente
+            les applications intelligentes. Des pipelines MLOps à l'automatisation des données,
+            je travaille à l'intersection du logiciel et de l'intelligence.
+          </p>
+          <p>
+            Je préfère <strong>construire plutôt que lire</strong> — apprentissage par projet,
+            structuré et concret. Chaque système livré m'apprend ce que la salle de classe ne peut pas.
+          </p>
         </div>
-      </section>
-    </main>
+        <div class="about-facts">
+          <div class="fact"><span class="fact-k">LOCALISATION</span><span class="fact-v">Calais, France 🇫🇷</span></div>
+          <div class="fact"><span class="fact-k">FORMATION</span><span class="fact-v">M2 MISC · EILCO</span></div>
+          <div class="fact"><span class="fact-k">FOCUS</span><span class="fact-v">Backend + Intégration IA</span></div>
+          <div class="fact"><span class="fact-k">LANGUES</span><span class="fact-v">Arabe · Français · Anglais</span></div>
+          <div class="fact"><span class="fact-k">ORIGINE</span><span class="fact-v">Al Hoceima, Maroc 🇲🇦</span></div>
+          <div class="fact"><span class="fact-k">STATUT</span><span class="fact-v available">Ouvert aux opportunités</span></div>
+        </div>
+      </div>
+    </section>
 
-    <footer class="footer">
-      <p>© <span id="year"></span> Med Boukechouch • Fait avec passion.</p>
-    </footer>
+    <!-- SKILLS -->
+    <section id="skills" class="section reveal">
+      <div class="section-label">// 02 — STACK TECHNIQUE</div>
+      <h2 class="section-title">Compé<span class="dim">tences</span></h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="skill-icon">⚙️</div>
+          <div class="skill-cat">BACKEND</div>
+          <h3>Ingénierie</h3>
+          <div class="tags">
+            <span class="tag hi">Python</span>
+            <span class="tag hi">Java</span>
+            <span class="tag">REST APIs</span>
+            <span class="tag">Docker</span>
+            <span class="tag">Git</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon">🤖</div>
+          <div class="skill-cat">IA / ML</div>
+          <h3>Intelligence</h3>
+          <div class="tags">
+            <span class="tag hi">TensorFlow</span>
+            <span class="tag hi">Scikit-learn</span>
+            <span class="tag">XGBoost</span>
+            <span class="tag">n8n</span>
+            <span class="tag">MLOps</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon">🗄️</div>
+          <div class="skill-cat">DATA ENGINEERING</div>
+          <h3>Pipelines</h3>
+          <div class="tags">
+            <span class="tag hi">SQL</span>
+            <span class="tag hi">BigQuery</span>
+            <span class="tag">Airflow</span>
+            <span class="tag">dbt</span>
+            <span class="tag">GCP</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon">📊</div>
+          <div class="skill-cat">BI / VISUALISATION</div>
+          <h3>Analytics</h3>
+          <div class="tags">
+            <span class="tag hi">Power BI</span>
+            <span class="tag hi">Streamlit</span>
+            <span class="tag">Pandas</span>
+            <span class="tag">Matplotlib</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon">☁️</div>
+          <div class="skill-cat">CLOUD / INFRA</div>
+          <h3>Infrastructure</h3>
+          <div class="tags">
+            <span class="tag hi">GCP</span>
+            <span class="tag hi">Docker</span>
+            <span class="tag">Linux</span>
+            <span class="tag">Bash</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon">🔗</div>
+          <div class="skill-cat">AUTOMATISATION</div>
+          <h3>Orchestration</h3>
+          <div class="tags">
+            <span class="tag hi">n8n</span>
+            <span class="tag hi">Airflow</span>
+            <span class="tag">Webhooks</span>
+            <span class="tag">CI/CD</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <script src="script.js"></script>
-  </body>
+    <!-- PROJECTS (GitHub Live) -->
+    <section id="projects" class="section reveal">
+      <div class="section-label">// 03 — PROJETS GITHUB</div>
+      <div class="section-head">
+        <h2 class="section-title">Mes <span class="dim">travaux</span></h2>
+        <div class="section-actions">
+          <button id="toggleRepos" class="btn ghost small">Afficher tout</button>
+          <button id="refreshRepos" class="btn ghost small">↺ Rafraîchir</button>
+        </div>
+      </div>
+      <p id="repoSummary" class="muted mono">Chargement depuis GitHub…</p>
+      <div id="repoGrid" class="repo-grid" aria-live="polite"></div>
+
+      <!-- Projets académiques clés -->
+      <div class="section-label" style="margin-top:4rem">// PROJETS ACADÉMIQUES SÉLECTIONNÉS</div>
+      <div class="featured-projects">
+        <div class="featured-card">
+          <div class="feat-num">01</div>
+          <div class="feat-info">
+            <h3>Automatisation de Pipelines ML (PFE)</h3>
+            <p>Orchestration automatisée de workflows ML end-to-end avec n8n — projet de fin d'études Bachelor.</p>
+            <div class="tags"><span class="tag hi">n8n</span><span class="tag">Python</span><span class="tag">MLOps</span></div>
+          </div>
+        </div>
+        <div class="featured-card">
+          <div class="feat-num">02</div>
+          <div class="feat-info">
+            <h3>Application de Prédiction de Profit</h3>
+            <p>Modèle ML de prévision financière avec interface Streamlit déployée, collaboratif en stage.</p>
+            <div class="tags"><span class="tag hi">XGBoost</span><span class="tag">Streamlit</span><span class="tag">Pandas</span></div>
+          </div>
+        </div>
+        <div class="featured-card">
+          <div class="feat-num">03</div>
+          <div class="feat-info">
+            <h3>Dashboards BI & Pipelines ETL</h3>
+            <p>Tableaux de bord interactifs Power BI alimentés par des pipelines Airflow/dbt sur Google Cloud.</p>
+            <div class="tags"><span class="tag hi">Power BI</span><span class="tag">Airflow</span><span class="tag">BigQuery</span></div>
+          </div>
+        </div>
+        <div class="featured-card">
+          <div class="feat-num">04</div>
+          <div class="feat-info">
+            <h3>Système de Gestion de Restaurant</h3>
+            <p>Modélisation UML complète — menus, réservations, commandes, paiements. Collaboration IDDL.</p>
+            <div class="tags"><span class="tag hi">UML</span><span class="tag">Java</span><span class="tag">SQL</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education" class="section reveal">
+      <div class="section-label">// 04 — FORMATION</div>
+      <h2 class="section-title">Parcours <span class="dim">académique</span></h2>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-date">2024 — EN COURS</div>
+          <div class="tl-body">
+            <h3>Master en Informatique — MISC</h3>
+            <h4>EILCO · Calais, France 🇫🇷</h4>
+            <p>Ingénierie logicielle avancée, systèmes IA, architectures distribuées. Spécialisation backend engineering et intégration IA à l'échelle de production.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">2022 — 2024</div>
+          <div class="tl-body">
+            <h3>Licence — Ingénierie des Données &amp; Dev Logiciel (IDDL)</h3>
+            <h4>FSTH · Al Hoceima, Maroc 🇲🇦</h4>
+            <p>Fondations en data engineering, développement logiciel et systèmes ML. <strong>PFE :</strong> Automatisation de pipelines ML avec n8n.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">2020 — 2022</div>
+          <div class="tl-body">
+            <h3>DEUST — Mathématiques, Informatique, Physique (MIP)</h3>
+            <h4>Maroc · Score : 12.61/20</h4>
+            <p>Fondements scientifiques et mathématiques de l'informatique.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">2022</div>
+          <div class="tl-body">
+            <h3>Baccalauréat — Sciences Physiques</h3>
+            <h4>Option française · <strong>Mention Bien</strong></h4>
+            <p>Filière scientifique avec distinction, option française.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section reveal">
+      <div class="section-label">// 05 — CONTACT</div>
+      <h2 class="section-title">Travailler <span class="dim">ensemble</span></h2>
+      <div class="contact-grid">
+        <div class="contact-left">
+          <p>Je recherche activement des opportunités en <strong>ingénierie backend</strong> avec intégration IA, des stages et des collaborations de recherche. Si vous construisez quelque chose d'ambitieux, parlons-en.</p>
+          <div class="avail-badge">
+            <span class="dot"></span>
+            <div>
+              <strong>Actuellement disponible</strong>
+              <span>Calais · Ouvert au télétravail &amp; relocation</span>
+            </div>
+          </div>
+        </div>
+        <div class="contact-links">
+          <a href="https://github.com/medboukechouch" class="contact-link" target="_blank" rel="noreferrer">
+            <span class="cl-icon">⌥</span>
+            <div><span class="cl-label">GITHUB</span><span class="cl-val">medboukechouch</span></div>
+            <span class="cl-arr">→</span>
+          </a>
+          <a href="https://medboukechouch.github.io" class="contact-link" target="_blank" rel="noreferrer">
+            <span class="cl-icon">◈</span>
+            <div><span class="cl-label">PORTFOLIO</span><span class="cl-val">medboukechouch.github.io</span></div>
+            <span class="cl-arr">→</span>
+          </a>
+          <a href="mailto:votre.email@example.com" class="contact-link">
+            <span class="cl-icon">✉</span>
+            <div><span class="cl-label">EMAIL</span><span class="cl-val">votre.email@example.com</span></div>
+            <span class="cl-arr">→</span>
+          </a>
+          <a href="https://linkedin.com/in/medboukechouch" class="contact-link" target="_blank" rel="noreferrer">
+            <span class="cl-icon">↗</span>
+            <div><span class="cl-label">LINKEDIN</span><span class="cl-val">Mohamed Boukechouch</span></div>
+            <span class="cl-arr">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>© <span id="year"></span> <span class="accent-text">Mohamed Boukechouch</span> · Fait avec du code propre.</p>
+    <p class="mono muted">Backend Engineer & AI Systems · Calais, France</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
 </html>
