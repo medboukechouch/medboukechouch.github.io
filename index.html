@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Med Boukechouch | Portfolio</title>
+    <meta
+      name="description"
+      content="Portfolio moderne et interactif de Med Boukechouch - projets, compétences et contact."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="cursor-glow" aria-hidden="true"></div>
+
+    <header class="header glass" id="top">
+      <a href="#top" class="logo">Med<span>.</span></a>
+      <nav class="nav">
+        <a href="#about">À propos</a>
+        <a href="#skills">Compétences</a>
+        <a href="#projects">Projets</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button id="themeToggle" class="theme-toggle" aria-label="Changer le thème">
+        <span class="sun">☀️</span>
+        <span class="moon">🌙</span>
+      </button>
+    </header>
+
+    <main>
+      <section class="hero section reveal">
+        <div class="hero-content">
+          <p class="badge">Disponible pour collaborer</p>
+          <h1>
+            Salut, je suis <span>Med Boukechouch</span><br />
+            Développeur Web moderne
+          </h1>
+          <p>
+            Je construis des expériences web rapides, élégantes et interactives.
+            Voici un portfolio moderne prêt pour <strong>GitHub Pages</strong>.
+          </p>
+          <div class="hero-cta">
+            <a class="btn primary" href="#projects">Voir mes projets</a>
+            <a class="btn" href="https://github.com/medboukechouch" target="_blank" rel="noreferrer">Mon GitHub</a>
+          </div>
+          <div class="quick-stats">
+            <div>
+              <strong id="repoCount">--</strong>
+              <span>Repos publics</span>
+            </div>
+            <div>
+              <strong id="followersCount">--</strong>
+              <span>Followers</span>
+            </div>
+            <div>
+              <strong id="starsCount">--</strong>
+              <span>Stars totales</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="blob blob-1"></div>
+          <div class="blob blob-2"></div>
+          <article class="profile-card glass">
+            <h2>medboukechouch</h2>
+            <p>Créateur de solutions web propres et modernes.</p>
+            <a href="https://github.com/medboukechouch" target="_blank" rel="noreferrer">Voir le profil GitHub →</a>
+          </article>
+        </div>
+      </section>
+
+      <section id="about" class="section reveal">
+        <h2>À propos</h2>
+        <p>
+          Passionné par le développement web, j’aime transformer des idées en interfaces
+          performantes et visuellement marquantes. Mon objectif est de livrer des produits
+          intuitifs, maintenables et prêts pour la production.
+        </p>
+      </section>
+
+      <section id="skills" class="section reveal">
+        <h2>Compétences</h2>
+        <div class="chips">
+          <span>HTML5</span>
+          <span>CSS3</span>
+          <span>JavaScript</span>
+          <span>React</span>
+          <span>Node.js</span>
+          <span>Git & GitHub</span>
+          <span>Responsive Design</span>
+          <span>UI/UX</span>
+        </div>
+      </section>
+
+      <section id="projects" class="section reveal">
+        <div class="section-head">
+          <h2>Projets récents</h2>
+          <button id="refreshRepos" class="btn small">Rafraîchir</button>
+        </div>
+        <p class="muted">Chargés automatiquement depuis GitHub.</p>
+        <div id="repoGrid" class="repo-grid" aria-live="polite"></div>
+      </section>
+
+      <section id="contact" class="section reveal">
+        <h2>Contact</h2>
+        <p>Vous avez une idée de projet ? Discutons-en.</p>
+        <div class="hero-cta">
+          <a class="btn primary" href="mailto:youremail@example.com">Envoyer un email</a>
+          <a class="btn" href="https://github.com/medboukechouch" target="_blank" rel="noreferrer">Message via GitHub</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>© <span id="year"></span> Med Boukechouch • Fait avec passion.</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
